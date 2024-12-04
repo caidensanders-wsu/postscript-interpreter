@@ -28,17 +28,24 @@ def interpret(tokens):
 
     for token in tokens:
         # Attempt to process the token as a constant
-        is_constant, processed_value = process_constants(token, dictionary_stack)
-        
-        if is_constant:
-            operand_stack.push(processed_value)
-            continue  # Move to the next token
+        result = process_constants(token, dictionary_stack)
+
+        if isinstance(result, tuple):
+            is_constant, processed_value = result
+            if is_constant:
+                operand_stack.push(processed_value)
+                continue 
+        else:
+            pass 
 
         # Lookup the token in the dictionary stack
-        operation = lookup(token)
-        
+        try:
+            operation = lookup(token)
+        except ValueError as e:
+            raise ValueError(f"Error interpreting token '{token}': {e}")
+
         if callable(operation):
-            operation()  # Execute the operation
+            operation()
         elif isinstance(operation, tuple):
             # Assuming a tuple represents a procedure with a static link
             procedure, static_link = operation
@@ -59,7 +66,7 @@ def execute_procedure(procedure, static_link):
         procedure (list): The list of tokens representing the procedure.
         static_link (int): The index or reference to the static link in the dictionary stack.
     """
-    
+
     dictionary_stack.push((static_link, {}))
     interpret(procedure)
     dictionary_stack.pop()

@@ -63,3 +63,59 @@ To enable static scoping, modify the `use_static_scoping` variable in the `globa
 
 use_static_scoping = True # Set to true for static scoping
 ```
+
+## Examples
+
+### Dynamic vs Static Scoping
+
+With dynamic scoping, observe the following output:
+
+```plaintext
+REPL> /z 1 def
+REPL>
+REPL> /inc {
+3 dict begin
+dup z add
+end
+} def
+REPL>
+REPL> 10 inc =
+11
+REPL> clear
+REPL>
+REPL>/outer {
+3 dict begin
+/z 2 def
+10 inc
+end
+} def
+REPL>
+REPL> outer =
+12
+```
+
+With static scoping, observe how the output changes:
+
+```plaintext
+REPL> /z 1 def
+REPL>
+REPL> /inc {
+3 dict begin
+dup z add
+end
+} def
+REPL> 
+REPL> 10 inc =
+11
+REPL> clear
+REPL>
+REPL>/outer {
+3 dict begin
+/z 2 def
+10 inc
+end
+} def
+REPL>
+REPL> outer =
+11
+```

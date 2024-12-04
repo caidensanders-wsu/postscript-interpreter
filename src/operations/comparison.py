@@ -131,6 +131,23 @@ def and_operation(stack):
 	res = bool(op1) and bool(op2)
 	stack.push(res)
 
+def not_operation(stack):
+	"""
+	Performs a logical NOT operation on the top item on the stack. Pushes the
+	result (True or False).
+	
+	Args:
+		stack (Stack): The stack containing oeprands.
+	"""
+
+	if stack.size() < 1:
+		print("not enough operands.")
+		return
+	
+	op = stack.pop()
+	res = not bool(op)
+	stack.push(res)
+
 def or_operation(stack):
 	"""
 	Performs a lgoical OR operation on the top two items on the stack. Pushes
@@ -157,5 +174,6 @@ operations = {
 	"le": le_operation,
 	"lt": lt_operation,
 	"and": and_operation,
+	"not": not_oepration,
 	"or": or_operation,
 }

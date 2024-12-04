@@ -109,7 +109,7 @@ def repl():
 
             interpret(tokens)
 
-            print(f"Operand Stack: ${operand_stack}")
+            print(f"Operand Stack: {operand_stack}")
         except Exception as e:
             print(f"Error: {e}")
 

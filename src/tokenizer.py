@@ -9,11 +9,13 @@ import re
 
 def tokenize(s):
     pattern = r"""
-        \(.*?\)                 # Match parentheses and their content
+        ==                      # Matches '=='
+        | \(.*?\)               # Match parentheses and their content
         | /?[a-zA-Z()][a-zA-Z0-9_()]*  # Match identifiers and keywords
         | [-]?[0-9]*\.?[0-9]+   # Match integers or floats (e.g., 42, -42, 3.14, -3.14)
         | [}{]+                 # Match braces
         | %.*                   # Match comments
         | [^ \t\n]              # Match single non-whitespace characters
     """
+
     return re.findall(pattern, s, re.VERBOSE)

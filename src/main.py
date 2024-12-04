@@ -84,17 +84,20 @@ def lookup(name):
 
     raise ValueError(f"Undefined name: {name}")
 
-def stack():
-    """
-    Print the operand and dictionary stacks for debugging.
-    """
-    print("Operand Stack:")
-    for item in reversed(operand_stack.items):
-        print(item)
-    print("\nDictionary Stack:")
-    for i, (static_link, d) in enumerate(dictionary_stack.items):
-        print(f"Dict {i} (static link: {static_link}): {d}")
-    print("\n")
+# For debugging purposes
+# Displays the operand stack & dictionary stack
+
+# def stack():
+#     """
+#     Print the operand and dictionary stacks for debugging.
+#     """
+#     print("Operand Stack:")
+#     for item in reversed(operand_stack.items):
+#         print(item)
+#     print("\nDictionary Stack:")
+#     for i, (static_link, d) in enumerate(dictionary_stack.items):
+#         print(f"Dict {i} (static link: {static_link}): {d}")
+#     print("\n")
 
 def repl():
     while user_input := input("REPL> "):
@@ -103,10 +106,10 @@ def repl():
                 break
 
             tokens = parse(tokenize(user_input))
-            print(f"Tokens: {tokens}")
 
             interpret(tokens)
-            stack()
+
+            print(f"Operand Stack: ${operand_stack}")
         except Exception as e:
             print(f"Error: {e}")
 

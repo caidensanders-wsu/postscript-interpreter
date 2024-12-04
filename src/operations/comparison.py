@@ -174,6 +174,6 @@ operations = {
 	"le": le_operation,
 	"lt": lt_operation,
 	"and": and_operation,
-	"not": not_oepration,
+	"not": not_operation,
 	"or": or_operation,
 }

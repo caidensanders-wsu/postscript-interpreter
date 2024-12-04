@@ -96,12 +96,18 @@ def stack():
         print(f"Dict {i} (static link: {static_link}): {d}")
     print("\n")
 
-while user_input := input("REPL> "):
-    try:
-        tokens = parse(tokenize(user_input))
-        print(f"Tokens: {tokens}")
+def repl():
+    while user_input := input("REPL> "):
+        try:
+            if user_input == "quit":
+                break
 
-        interpret(tokens)
-        stack()
-    except Exception as e:
-        print(f"Error: {e}")
+            tokens = parse(tokenize(user_input))
+            print(f"Tokens: {tokens}")
+
+            interpret(tokens)
+            stack()
+        except Exception as e:
+            print(f"Error: {e}")
+
+repl()
